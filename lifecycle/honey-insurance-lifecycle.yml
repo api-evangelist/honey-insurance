@@ -1,0 +1,47 @@
+generated: '2026-07-25'
+method: searched
+source: live probes of honeyinsurance.com and its subdomains — 2026-07-25
+versioning:
+  scheme: none published
+  current: null
+  docs: null
+  note: >-
+    No public API is versioned. The private backend at api.honeyinsurance.com
+    answers a /v1/ path prefix with the same HTTP 403 deny as every other path,
+    which hints at internal versioning but publishes nothing.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No deprecation or sunset policy is published; no Deprecation pointer emitted.
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No developer SLA. The consumer service commitments that do exist are claims
+    commitments (24/7 claims line on 137 138, complaints acknowledged within 24
+    hours, internal dispute resolution within 30 days) rather than API
+    availability targets.
+status_page:
+  url: null
+  probed:
+  - url: https://status.honeyinsurance.com
+    status: NXDOMAIN
+  - url: https://honeyinsurance.statuspage.io
+    status: 'redirects to atlassian.com/software/statuspage — unclaimed, not a real
+      status page'
+  note: No status page exists; no StatusPage pointer emitted.
+changelog:
+  api_changelog: false
+  nearest_surface: https://www.honeyinsurance.com/media-centre/newsroom/product-updates/
+  note: >-
+    The newsroom carries a dated "Product Updates" category (nine entries,
+    Jun 2021 – May 2023), but the entries are award announcements, partnership
+    news and executive hires — company PR, not an API or product release log.
+    It is recorded here for honesty and deliberately NOT wired as a ChangeLog
+    pointer.
+deprecated_operations: []
+lifecycle_stage: closed
+note: >-
+  Honey Insurance has no public API lifecycle to document because it has no
+  public API. Every field above is an honest absence recorded from a live probe,
+  not an unknown.

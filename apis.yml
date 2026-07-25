@@ -32,7 +32,7 @@ description: >-
   carrier operating outside the ACORD agency-download world and with a home
   market where the Consumer Data Right was designated for general insurance and
   then deferred, leaving no forcing function for open insurance APIs.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://www.honeyinsurance.com/images/honey-banner.png
 tags:
 - Insurance
 - Australia
@@ -50,6 +50,8 @@ modified: '2026-07-25'
 specificationVersion: '0.19'
 apis: []
 common:
+- type: DomainSecurity
+  url: security/honey-insurance-domain-security.yml
 - type: Website
   url: https://www.honeyinsurance.com/
 - type: About
@@ -70,8 +72,30 @@ common:
   url: https://www.honeyinsurance.com/terms/
 - type: PrivacyPolicy
   url: https://www.honeyinsurance.com/privacy/
+- type: SignUp
+  url: https://www.honeyinsurance.com/get-a-quote/start
+- type: Careers
+  url: https://www.honeyinsurance.com/join-the-team/
+- type: BrandKit
+  url: https://www.honeyinsurance.com/media-centre/brand-assets/
+- type: Press
+  url: https://www.honeyinsurance.com/media-centre/
 - type: WellKnown
+  url: well-known/honey-insurance-well-known.yml
+- type: OpenIDConnect
   url: https://auth.honeyinsurance.com/.well-known/openid-configuration
+- type: Authentication
+  url: authentication/honey-insurance-authentication.yml
+- type: OAuthScopes
+  url: scopes/honey-insurance-scopes.yml
+- type: Conformance
+  url: conformance/honey-insurance-conformance.yml
+- type: Lifecycle
+  url: lifecycle/honey-insurance-lifecycle.yml
+- type: Packages
+  url: packages/honey-insurance-packages.yml
+- type: LLMsTxt
+  url: llms/honey-insurance-llms.txt
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

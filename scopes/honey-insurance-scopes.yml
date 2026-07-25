@@ -1,0 +1,81 @@
+generated: '2026-07-25'
+method: searched
+source: https://auth.honeyinsurance.com/.well-known/openid-configuration
+docs: null
+note: >-
+  These are the scopes advertised by Honey Insurance's Auth0 custom-domain
+  tenant, harvested anonymously from OIDC discovery on 2026-07-25. They are the
+  stock OpenID Connect profile claims that Auth0 ships by default — there is no
+  insurance-domain scope (no quote, bind, policy, claim or document scope), no
+  published API audience to request an access token for, and no developer
+  credential path. Treat this as consumer account sign-in, not an API
+  authorization surface. Nothing here was derived from an OpenAPI definition,
+  because Honey publishes none.
+schemes:
+- name: Auth0OIDC
+  type: openIdConnect
+  source: well-known/honey-insurance-openid-configuration.json
+  issuer: https://auth.honeyinsurance.com/
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://auth.honeyinsurance.com/authorize
+    tokenUrl: https://auth.honeyinsurance.com/oauth/token
+  - flow: implicit
+    authorizationUrl: https://auth.honeyinsurance.com/authorize
+  - flow: clientCredentials
+    tokenUrl: https://auth.honeyinsurance.com/oauth/token
+  - flow: deviceCode
+    deviceAuthorizationUrl: https://auth.honeyinsurance.com/oauth/device/code
+    tokenUrl: https://auth.honeyinsurance.com/oauth/token
+scopes:
+- scope: openid
+  description: Request an ID token — the base OpenID Connect scope.
+  kind: oidc-standard
+- scope: profile
+  description: Access the end user's default profile claims.
+  kind: oidc-standard
+- scope: offline_access
+  description: Request a refresh token for long-lived sessions.
+  kind: oidc-standard
+- scope: email
+  description: Access the end user's email address.
+  kind: oidc-standard
+- scope: email_verified
+  description: Access whether the end user's email address has been verified.
+  kind: oidc-standard
+- scope: address
+  description: Access the end user's postal address claim.
+  kind: oidc-standard
+- scope: phone
+  description: Access the end user's phone number claim.
+  kind: oidc-standard
+- scope: name
+  description: Access the end user's full name.
+  kind: profile-claim
+- scope: given_name
+  description: Access the end user's given name.
+  kind: profile-claim
+- scope: family_name
+  description: Access the end user's family name.
+  kind: profile-claim
+- scope: nickname
+  description: Access the end user's nickname.
+  kind: profile-claim
+- scope: picture
+  description: Access the end user's profile picture URL.
+  kind: profile-claim
+- scope: created_at
+  description: Access the account creation timestamp.
+  kind: auth0-extension
+- scope: identities
+  description: Access the linked identity providers on the Auth0 user record.
+  kind: auth0-extension
+domain_scopes:
+  present: false
+  note: >-
+    No quote, bind, issue, policy, claim (FNOL), document or payment scope is
+    published. The four insurance verbs exist only as consumer web and telephone
+    journeys — see review.yml findings.insuranceVerbs.
+related:
+  authentication: authentication/honey-insurance-authentication.yml
+  well_known: well-known/honey-insurance-well-known.yml

@@ -1,0 +1,68 @@
+generated: '2026-07-25'
+method: searched
+source: live probes of every Honey Insurance host on 2026-07-25
+note: >-
+  Honey Insurance publishes no /.well-known/ discovery surface on its consumer
+  website and its API host denies all anonymous requests. The only /.well-known/
+  documents that are anonymously reachable belong to the Auth0 custom-domain
+  tenant at auth.honeyinsurance.com, which serves OpenID Connect discovery for
+  consumer "My account" sign-in. There is no security.txt, no api-catalog, no
+  ai-plugin.json and no oauth-protected-resource document anywhere on the
+  property.
+hosts:
+- host: https://auth.honeyinsurance.com
+  role: Auth0 custom-domain identity tenant (consumer account sign-in)
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: honey-insurance-openid-configuration.json
+    standard: OpenID Connect Discovery 1.0
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: honey-insurance-oauth-authorization-server.json
+    standard: RFC 8414
+    note: Byte-identical to the OpenID Connect discovery document.
+  - path: /.well-known/jwks.json
+    status: 200
+    file: honey-insurance-jwks.json
+    standard: RFC 7517
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    standard: RFC 9728
+  - path: /.well-known/security.txt
+    status: 404
+    standard: RFC 9116
+- host: https://www.honeyinsurance.com
+  role: Consumer marketing and self-service site
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /robots.txt
+    status: 404
+- host: https://api.honeyinsurance.com
+  role: Private AWS API Gateway backing Honey's own funnel and account app
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 403
+  - path: /.well-known/oauth-authorization-server
+    status: 403
+  - path: /.well-known/security.txt
+    status: 403
+  note: >-
+    Every path returns HTTP 403 {"message":"Forbidden"} — the AWS API Gateway
+    default deny. Nothing here is documented or anonymously discoverable.
+security_txt:
+  present: false
+  probed:
+  - https://www.honeyinsurance.com/.well-known/security.txt
+  - https://honeyinsurance.com/.well-known/security.txt
+  - https://api.honeyinsurance.com/.well-known/security.txt
+  - https://auth.honeyinsurance.com/.well-known/security.txt

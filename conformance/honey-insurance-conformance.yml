@@ -1,0 +1,101 @@
+generated: '2026-07-25'
+method: derived
+source: >-
+  well-known/honey-insurance-openid-configuration.json,
+  well-known/honey-insurance-jwks.json, live probes 2026-07-25
+note: >-
+  Honey Insurance publishes no OpenAPI, AsyncAPI, GraphQL or gRPC contract, so
+  every REST-shaped standard below is asserted false on evidence of absence, not
+  on inspection of a spec. The only standards Honey demonstrably conforms to are
+  the identity standards its Auth0 tenant serves anonymously. No compliance
+  certifications (SOC 2, ISO 27001, PCI DSS) are published anywhere on the
+  property, so no Compliance pointer is emitted.
+standards:
+- id: openid-connect-discovery-1.0
+  conforms: true
+  evidence: https://auth.honeyinsurance.com/.well-known/openid-configuration returns
+    HTTP 200 with a well-formed OIDC provider metadata document.
+- id: oauth2
+  conforms: true
+  evidence: OIDC metadata advertises authorization, token, revocation and device
+    authorization endpoints with authorization_code, client_credentials, implicit,
+    refresh_token and device_code grants.
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: true
+  evidence: /.well-known/oauth-authorization-server returns HTTP 200 (byte-identical
+    to the OIDC discovery document).
+- id: rfc7517-jwk
+  conforms: true
+  evidence: /.well-known/jwks.json returns HTTP 200 with an RSA signing key set.
+- id: rfc7636-pkce
+  conforms: true
+  evidence: code_challenge_methods_supported includes S256.
+- id: rfc9449-dpop
+  conforms: true
+  evidence: dpop_signing_alg_values_supported includes ES256.
+- id: rfc9728-oauth-protected-resource-metadata
+  conforms: false
+  evidence: /.well-known/oauth-protected-resource returns HTTP 404 on every host.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on www and honeyinsurance.com,
+    403 on api.honeyinsurance.com.
+- id: openapi
+  conforms: false
+  evidence: No OpenAPI or Swagger document exists; /openapi.json, /openapi.yaml,
+    /swagger.json, /v1/openapi.json, /api-docs, /docs, /redoc and /rapidoc all
+    return HTTP 403 on api.honeyinsurance.com and no docs host resolves.
+- id: asyncapi
+  conforms: false
+  evidence: No event, streaming or webhook catalogue is published.
+- id: graphql
+  conforms: false
+  evidence: https://api.honeyinsurance.com/graphql returns HTTP 403; no SDL is
+    obtainable anonymously and none is documented.
+- id: grpc
+  conforms: false
+  evidence: No .proto definitions are published.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: The only observable error body is the AWS API Gateway default deny
+    {"message":"Forbidden"}, which is not application/problem+json.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No deprecation or sunset policy is published; no API is versioned in
+    public.
+- id: acord
+  conforms: false
+  evidence: Zero hits for ACORD, AL3, ACORD XML, ACORD certified or NGDS across the
+    homepage, /about-us/, /documents/, /general-conditions/ and the newsroom.
+    Consistent with an Australian personal-lines direct writer operating outside
+    the US agency-download world.
+- id: cdr-consumer-data-right
+  conforms: false
+  evidence: Australia's Consumer Data Right was designated to extend to general
+    insurance and then deferred, so no open-insurance obligation reaches Honey and
+    no CDR register participation exists.
+- id: hsts
+  conforms: true
+  evidence: www.honeyinsurance.com sends Strict-Transport-Security max-age=63072000;
+    auth.honeyinsurance.com sends max-age=31536000; includeSubDomains.
+- id: dnssec
+  conforms: false
+  evidence: No DS record for honeyinsurance.com.
+- id: dmarc
+  conforms: true
+  evidence: DMARC published with policy reject.
+certifications_published: []
+regulatory:
+- regime: AFSL (Australian Financial Services Licence)
+  identifier: AFSL 528244
+  entity: Honey Insurance Pty Ltd (ABN 52 643 672 628)
+  source: https://www.honeyinsurance.com/terms/
+- regime: AFSL (underwriter)
+  identifier: AFSL 233082
+  entity: RACQ Insurance Limited (ABN 50 009 704 152), APRA-authorised general insurer
+  source: https://www.honeyinsurance.com/terms/
+- regime: AFCA (Australian Financial Complaints Authority) external dispute resolution
+  entity: Honey Insurance Pty Ltd
+  evidence: Published three-stage internal dispute resolution process escalating to
+    AFCA after 30 days.
+  source: https://www.honeyinsurance.com/complaints-and-feedback/

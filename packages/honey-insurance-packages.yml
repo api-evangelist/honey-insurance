@@ -1,0 +1,42 @@
+generated: '2026-07-25'
+method: searched
+source: npm registry search, PyPI, GitHub org probe, honeyinsurance.com site search — 2026-07-25
+packages: []
+note: >-
+  No first-party Honey Insurance client library exists in any public registry.
+  npm registry search for "honey-insurance", "honeyinsurance" and "honey
+  insurance" returns only unrelated projects (@honey-finance/sdk,
+  @react-hive/honey-layout, json-honey, @emilgroup/insurance-sdk). PyPI has no
+  honey-insurance project. The GitHub organisation at
+  github.com/honey-insurance holds only forks of third-party tooling (middy,
+  spot, openapi-typescript-codegen, libhoney-js, beeline-nodejs, sls-dev-tools,
+  aws-lambda-builders, dynaglue and similar) with no first-party source and no
+  published API definition, and the org sets no display name, website or
+  description, so even its attribution to this company is unconfirmed. This is
+  the expected result for a provider with no public API: there is nothing for an
+  SDK to wrap. No SDKs pointer is emitted.
+registries_probed:
+- registry: npm
+  result: no first-party package
+- registry: pypi
+  result: no first-party package
+- registry: rubygems
+  result: not applicable — no API to wrap
+- registry: packagist
+  result: not applicable — no API to wrap
+- registry: nuget
+  result: not applicable — no API to wrap
+- registry: maven-central
+  result: not applicable — no API to wrap
+- registry: pkg.go.dev
+  result: not applicable — no API to wrap
+- registry: crates.io
+  result: not applicable — no API to wrap
+consumer_apps:
+- name: Honey Smart Home app
+  kind: consumer mobile application
+  note: >-
+    Honey ships a consumer smart-home companion app (terms at
+    /smarthome-app-terms/, privacy at /smarthome-app-privacy/) for the free
+    sensor bundle. It is an end-user app, not a developer SDK, and no client
+    library or device API is published for it.
