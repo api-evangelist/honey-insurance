@@ -1,0 +1,284 @@
+aid: honey-insurance
+name: Honey Insurance
+review:
+  question: Does Honey Insurance expose a public, self-serve developer portal or a documented insurance API (quote, bind, issue, FNOL)?
+  answer: false
+  date: '2026-07-25'
+  reviewer: API Evangelist
+  homeMarket: Australia
+  gated: true
+  specsHarvested: 0
+findings:
+  summary: |
+    Honey Insurance publishes no public API surface of any kind. Every
+    first-party developer path was probed on 2026-07-25 and none exists:
+    developer.honeyinsurance.com, developers.honeyinsurance.com and
+    docs.honeyinsurance.com do not resolve (NXDOMAIN), and
+    /developers, /developer, /api, /partners and /integrations all return
+    HTTP 404 from www.honeyinsurance.com. The published sitemap
+    (https://www.honeyinsurance.com/sitemap-0.xml, HTTP 200, 80 URLs) contains
+    no developer, API, partner-portal or broker page whatsoever — the site is
+    a consumer marketing and self-service funnel plus a blog and newsroom.
+
+    A real backend host does exist. api.honeyinsurance.com resolves and answers
+    with application/json, but every path probed — /, /openapi.json,
+    /openapi.yaml, /swagger.json, /api-docs, /docs, /v1/openapi.json, /graphql,
+    /health, /.well-known/openid-configuration and
+    /.well-known/oauth-authorization-server — returns HTTP 403 with the body
+    {"message":"Forbidden"}. That is the AWS API Gateway default deny response.
+    This is the private backend for Honey's own quote funnel and account app,
+    not a third-party API, and nothing about it is documented. No spec was
+    harvested and none was inferred.
+
+    The only anonymously reachable standards-based surface is an Auth0
+    custom-domain tenant at auth.honeyinsurance.com, which serves OpenID
+    Connect discovery at /.well-known/openid-configuration and
+    /.well-known/oauth-authorization-server (both HTTP 200) plus a JWKS at
+    /.well-known/jwks.json (HTTP 200). This is consumer account sign-in for
+    "My account" — the advertised scopes are the stock Auth0 OIDC profile
+    claims (openid, profile, offline_access, name, given_name, family_name,
+    nickname, email, email_verified, picture, created_at, identities, phone,
+    address). There are no insurance-domain scopes, no API audience is
+    published, and there is no developer credential issuance path. Treating
+    this as a developer auth model would be a misread; it is an end-user login.
+
+    Quote, bind, issue and FNOL all exist at Honey — they are simply not
+    exposed as APIs. Quote and bind run as a consumer web journey at
+    /get-a-quote/start (three product entry points: homeowners, landlord,
+    renters). Policy issue and document delivery sit behind the authenticated
+    /my-account area. FNOL is lodged online at /my-account/claims, by phone on
+    137 138 (24/7), or by email to contact@honeyinsurance.com. Every one of the
+    four verbs is consumer-facing only; none is agent-facing or partner-facing
+    in any documented, self-serve, machine-readable form.
+
+    ACORD posture: no ACORD reference found. Searches across the homepage,
+    /about-us/, /documents/, /contact-us/, /general-conditions/ and the
+    Finsure partnership release returned zero hits for ACORD, AL3, ACORD XML,
+    ACORD certified or NGDS. This is expected and coherent — Honey is an
+    Australian personal-lines direct writer operating entirely outside the
+    US-centric ACORD agency-download and agency-management-system world, and
+    Australia has no equivalent forcing function: the Consumer Data Right that
+    opened banking and energy was designated to extend to general insurance
+    and then deferred and de-prioritised, so no open-insurance obligation
+    reaches this company.
+
+    Honey's many announced "partnerships" (RACQ, AGL, Finsure, Metricon,
+    McGrath, BGC Housing Group, Specialist Finance Group, Bank of Queensland,
+    Airtasker, MEBank, Notion) are commercial distribution and embedded-referral
+    deals announced in the newsroom. None of them publishes an API, a partner
+    developer portal, an onboarding guide or an integration reference. The
+    homepage renders a "PartnersCarousel" component, which is a logo strip, not
+    an integrations directory.
+
+    Corporate identity confirmed from https://www.honeyinsurance.com/terms/:
+    "Honey Insurance Pty Ltd (ABN 52 643 672 628, AFSL 528244)"; general
+    insurance products "are issued by RACQ Insurance Limited ABN 50 009 704
+    152, AFSL 233082" — the APRA-authorised underwriter behind the brand.
+
+    A GitHub organisation exists at https://github.com/honey-insurance
+    (created 2020-10-27, 14 public repositories). Every repository is a fork of
+    third-party tooling — middy, spot, openapi-typescript-codegen, libhoney-js,
+    beeline-nodejs, json-refs, react-spring, sls-dev-tools,
+    aws-lambda-builders, html-to-jsx-transform, aws-sdk-client-mock, dynaglue,
+    jscodeshift, iam-identity-center-team-public. There is no first-party
+    source, no API definition and no published spec in the org, and the org
+    sets no display name, website or description, so attribution to this
+    company is plausible (the fork mix reads as an AWS serverless shop, and the
+    creation date matches Honey's launch window) but is NOT confirmed. It is
+    therefore recorded here only and deliberately omitted from apis.yml.
+  developerPortal:
+    url: ''
+    confirmed: false
+    classification: none
+    note: |
+      No developer portal of any classification exists — not a self-serve
+      portal, not a partner/agent login wall, not even a marketing
+      "innovation" or "technology" page framed as a developer surface. The
+      only login wall on the property is the consumer "My account" area.
+  acordPosture: no ACORD reference found
+  insuranceVerbs:
+    quote:
+      exposedAsAPI: false
+      channel: consumer web funnel at https://www.honeyinsurance.com/get-a-quote/start
+    bind:
+      exposedAsAPI: false
+      channel: same consumer web funnel; card payment and policy start online
+    issue:
+      exposedAsAPI: false
+      channel: authenticated consumer portal at https://www.honeyinsurance.com/my-account
+    fnol:
+      exposedAsAPI: false
+      channel: https://www.honeyinsurance.com/my-account/claims, phone 137 138 (24/7), contact@honeyinsurance.com
+  authModel:
+    scheme: OAuth 2.0 / OpenID Connect (Auth0 custom domain)
+    audience: end-user consumer accounts only
+    developerCredentials: false
+    issuer: https://auth.honeyinsurance.com/
+    authorizationEndpoint: https://auth.honeyinsurance.com/authorize
+    tokenEndpoint: https://auth.honeyinsurance.com/oauth/token
+    userinfoEndpoint: https://auth.honeyinsurance.com/userinfo
+    jwksUri: https://auth.honeyinsurance.com/.well-known/jwks.json
+    scopesSupported:
+      - openid
+      - profile
+      - offline_access
+      - name
+      - given_name
+      - family_name
+      - nickname
+      - email
+      - email_verified
+      - picture
+      - created_at
+      - identities
+      - phone
+      - address
+    note: |
+      Stock Auth0 tenant metadata. No insurance-domain scopes, no published API
+      audience, no client-registration path for third parties. The backend at
+      api.honeyinsurance.com denies all anonymous requests with HTTP 403 and
+      publishes no auth documentation.
+  webhooks:
+    documented: false
+    asyncapi: false
+    note: No event catalogue, callback documentation or AsyncAPI definition is published.
+  postman:
+    public: false
+    note: No public Postman collection or workspace was found.
+  graphql:
+    documented: false
+    note: https://api.honeyinsurance.com/graphql returns HTTP 403; no GraphQL endpoint is documented and no SDL is obtainable anonymously.
+  grpc:
+    documented: false
+    note: No .proto files are published.
+  transports:
+    - protocol: HTTPS (web)
+      scheme: https
+      baseURL: https://www.honeyinsurance.com/
+      documented: true
+      note: Consumer marketing and self-service site, server-rendered with Astro, fronted by AWS WAF in ap-southeast-2.
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.honeyinsurance.com
+      documented: false
+      note: Private AWS API Gateway backing Honey's own funnel and account app. Every probed path returned HTTP 403 {"message":"Forbidden"}. Not a public API.
+    - protocol: OIDC
+      scheme: https
+      baseURL: https://auth.honeyinsurance.com/
+      documented: true
+      note: Auth0 custom-domain tenant. Anonymous discovery and JWKS are served (HTTP 200), but the audience is consumer account sign-in, not a developer API.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere on the property.
+probes:
+  - url: https://developer.honeyinsurance.com
+    status: NXDOMAIN
+  - url: https://developers.honeyinsurance.com
+    status: NXDOMAIN
+  - url: https://docs.honeyinsurance.com
+    status: NXDOMAIN
+  - url: https://api.honeyinsurance.com/
+    status: 403
+    note: '{"message":"Forbidden"} — AWS API Gateway default deny'
+  - url: https://api.honeyinsurance.com/openapi.json
+    status: 403
+  - url: https://api.honeyinsurance.com/openapi.yaml
+    status: 403
+  - url: https://api.honeyinsurance.com/swagger.json
+    status: 403
+  - url: https://api.honeyinsurance.com/v1/openapi.json
+    status: 403
+  - url: https://api.honeyinsurance.com/api-docs
+    status: 403
+  - url: https://api.honeyinsurance.com/docs
+    status: 403
+  - url: https://api.honeyinsurance.com/graphql
+    status: 403
+  - url: https://api.honeyinsurance.com/.well-known/openid-configuration
+    status: 403
+  - url: https://api.honeyinsurance.com/.well-known/oauth-authorization-server
+    status: 403
+  - url: https://www.honeyinsurance.com/developers
+    status: 404
+  - url: https://www.honeyinsurance.com/developer
+    status: 404
+  - url: https://www.honeyinsurance.com/api
+    status: 404
+  - url: https://www.honeyinsurance.com/partners
+    status: 404
+  - url: https://www.honeyinsurance.com/integrations
+    status: 404
+  - url: https://partners.honeyinsurance.com
+    status: NXDOMAIN
+  - url: https://portal.honeyinsurance.com
+    status: NXDOMAIN
+  - url: https://broker.honeyinsurance.com
+    status: NXDOMAIN
+  - url: https://brokers.honeyinsurance.com
+    status: NXDOMAIN
+  - url: https://agent.honeyinsurance.com
+    status: NXDOMAIN
+  - url: https://agents.honeyinsurance.com
+    status: NXDOMAIN
+  - url: https://sandbox.honeyinsurance.com
+    status: NXDOMAIN
+  - url: https://status.honeyinsurance.com
+    status: NXDOMAIN
+  - url: https://auth.honeyinsurance.com/.well-known/openid-configuration
+    status: 200
+    note: Auth0 OIDC discovery for consumer sign-in.
+  - url: https://auth.honeyinsurance.com/.well-known/oauth-authorization-server
+    status: 200
+  - url: https://auth.honeyinsurance.com/.well-known/jwks.json
+    status: 200
+  - url: https://www.honeyinsurance.com/sitemap-0.xml
+    status: 200
+    note: 80 URLs, none developer- or API-related.
+  - url: https://www.honeyinsurance.com/robots.txt
+    status: 404
+  - url: https://www.honeyinsurance.com/blog/rss.xml
+    status: 404
+    note: No RSS/Atom feed published for the blog (/rss.xml, /feed, /feed.xml, /blog/feed, /blog/index.xml also 404).
+  - url: https://github.com/honey-insurance
+    status: 200
+    note: 14 public repositories, all forks of third-party tooling; no first-party code or specs; attribution to this company unconfirmed.
+sources:
+  - url: https://www.honeyinsurance.com/
+    type: Website
+    note: Consumer home page. Three products — homeowners, renters, landlords. No developer, API or partner navigation.
+  - url: https://www.honeyinsurance.com/about-us/
+    type: About
+    note: Founder Richard Joffe; CEO David Krawitz; supporters named as RACQ, Airtasker, MEBank. No technical or API content.
+  - url: https://www.honeyinsurance.com/terms/
+    type: TermsOfService
+    note: Confirms Honey Insurance Pty Ltd ABN 52 643 672 628 AFSL 528244; products issued by RACQ Insurance Limited ABN 50 009 704 152 AFSL 233082.
+  - url: https://www.honeyinsurance.com/claims/
+    type: Documentation
+    note: FNOL channels — online at /my-account/claims, phone 137 138, email contact@honeyinsurance.com. No API or partner-system integration mentioned.
+  - url: https://www.honeyinsurance.com/documents/
+    type: Documentation
+    note: Policy documents are behind the consumer account login. Zero ACORD hits.
+  - url: https://www.honeyinsurance.com/sitemap-0.xml
+    type: Sitemap
+    note: Full URL inventory; confirms the absence of any developer or partner surface.
+  - url: https://auth.honeyinsurance.com/.well-known/openid-configuration
+    type: WellKnown
+    note: Auth0 OIDC metadata, fetched anonymously 2026-07-25.
+  - url: https://www.honeyinsurance.com/media-centre/newsroom/
+    type: Newsroom
+    note: Partnership announcements (Finsure, Metricon, McGrath, BGC, Specialist Finance Group, Bank of Queensland, AGL, Notion) are commercial distribution deals with no published API surface.
+actions:
+  openapiHarvested: false
+  openapiPath: null
+  specsCount: 0
+  apisListed: 0
+  apisYmlUpdated: true
+  reason: |
+    Bootstrap recorded as an honest stub. Honey Insurance has no public,
+    self-serve API surface, so apis[] is deliberately empty rather than padded
+    with an undocumented internal host or a marketing page dressed up as a
+    developer portal. The measurable finding is the absence itself: a
+    well-funded, technology-forward Australian insurtech with an entirely
+    closed integration posture, no ACORD footprint, and no open-insurance
+    obligation to force one open.

@@ -1,0 +1,77 @@
+aid: honey-insurance
+url: https://raw.githubusercontent.com/api-evangelist/honey-insurance/refs/heads/main/apis.yml
+name: Honey Insurance
+kind: company
+description: >-
+  Honey Insurance is an Australian direct-to-consumer insurtech selling smart
+  home, contents, renters and landlord insurance, founded by Richard Joffe and
+  headquartered in Sydney. Honey Insurance Pty Ltd (ABN 52 643 672 628, AFSL
+  528244) distributes and administers the policies, which are underwritten by
+  RACQ Insurance Limited (ABN 50 009 704 152, AFSL 233082), an APRA-authorised
+  general insurer. Its differentiator is a bundle of free smart-home sensors
+  supplied at policy inception in exchange for a recurring premium discount, a
+  three-minute online quote-and-bind funnel, and a heavy prevention rather than
+  indemnity pitch. It sells personal lines only and distributes through its own
+  website plus embedded partnerships with mortgage aggregators, home builders
+  and real-estate groups (Finsure, Metricon, McGrath, BGC, Specialist Finance
+  Group, Bank of Queensland, AGL, RACQ). Its API posture is closed: Honey
+  publishes no public developer portal, no API reference, no OpenAPI or Swagger
+  definition, no Postman collection, no GraphQL surface and no webhook or event
+  catalogue. Probes of developer, developers, docs, /developers, /api,
+  /developer, /partners and /integrations all return NXDOMAIN or HTTP 404, and
+  the sitemap contains no developer, API or partner-portal page at all. A real
+  backend host exists at api.honeyinsurance.com, but it is a private AWS API
+  Gateway that answers every path with HTTP 403 {"message":"Forbidden"}; it
+  serves Honey's own quote funnel and account app and is not documented for
+  third parties. The only publicly reachable standards-based surface is an
+  Auth0 custom-domain tenant at auth.honeyinsurance.com serving anonymous
+  OpenID Connect discovery for consumer account sign-in — not developer API
+  credentials. Quote, bind, issue and FNOL all exist only as consumer web and
+  telephone journeys. No ACORD, AL3, ACORD XML or NGDS reference appears
+  anywhere on the site, which is consistent with an Australian personal-lines
+  carrier operating outside the ACORD agency-download world and with a home
+  market where the Consumer Data Right was designated for general insurance and
+  then deferred, leaving no forcing function for open insurance APIs.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Insurance
+- Australia
+- Insurtech
+- Home Insurance
+- Property and Casualty
+- Personal Lines
+- Direct to Consumer
+- Embedded Insurance
+- Smart Home
+- Claims
+- Underwriting
+created: '2026-07-25'
+modified: '2026-07-25'
+specificationVersion: '0.19'
+apis: []
+common:
+- type: Website
+  url: https://www.honeyinsurance.com/
+- type: About
+  url: https://www.honeyinsurance.com/about-us/
+- type: Blog
+  url: https://www.honeyinsurance.com/blog/
+- type: Newsroom
+  url: https://www.honeyinsurance.com/media-centre/newsroom/
+- type: Support
+  url: https://www.honeyinsurance.com/honey-help/
+- type: FAQ
+  url: https://www.honeyinsurance.com/faq/
+- type: Vocabulary
+  url: https://www.honeyinsurance.com/glossary/
+- type: Login
+  url: https://www.honeyinsurance.com/my-account
+- type: TermsOfService
+  url: https://www.honeyinsurance.com/terms/
+- type: PrivacyPolicy
+  url: https://www.honeyinsurance.com/privacy/
+- type: WellKnown
+  url: https://auth.honeyinsurance.com/.well-known/openid-configuration
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
