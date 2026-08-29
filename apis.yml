@@ -32,6 +32,17 @@ description: >-
   carrier operating outside the ACORD agency-download world and with a home
   market where the Consumer Data Right was designated for general insurance and
   then deferred, leaving no forcing function for open insurance APIs.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.honeyinsurance.com/images/honey-banner.png
 tags:
 - Insurance
