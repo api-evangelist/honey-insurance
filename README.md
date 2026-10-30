@@ -1,4 +1,4 @@
-# Honey Insurance (honey-insurance)
+# Honey Insurance
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,61 +64,91 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Honey Insurance is an Australian direct-to-consumer insurtech selling smart home, contents, renters and landlord insurance, founded by Richard Joffe and headquartered in Sydney. Honey Insurance Pty Ltd (ABN 52 643 672 628, AFSL 528244) distributes and administers the policies, which are underwritten by RACQ Insurance Limited (ABN 50 009 704 152, AFSL 233082), an APRA-authorised general insurer. Its differentiator is a bundle of free smart-home sensors supplied at policy inception in exchange for a recurring premium discount, a three-minute online quote-and-bind funnel, and a prevention-over-indemnity pitch. It sells personal lines only, and distributes through its own website plus embedded partnerships with mortgage aggregators, home builders and real-estate groups.
+Honey Insurance is an Australian direct-to-consumer insurtech selling smart home, contents, renters and landlord insurance, founded by Richard Joffe and headquartered in Sydney. Honey Insurance Pty Ltd (ABN 52 643 672 628, AFSL 528244) distributes and administers the policies, which are underwritten by RACQ Insurance Limited (ABN 50 009 704 152, AFSL 233082), an APRA-authorised general insurer. Its differentiator is a bundle of free smart-home sensors supplied at policy inception in exchange for a recurring premium discount, a three-minute online quote-and-bind funnel, and a heavy prevention rather than indemnity pitch. It sells personal lines only and distributes through its own website plus embedded partnerships with mortgage aggregators, home builders and real-estate groups (Finsure, Metricon, McGrath, BGC, Specialist Finance Group, Bank of Queensland, AGL, RACQ). Its API posture is closed: Honey publishes no public developer portal, no API reference, no OpenAPI or Swagger definition, no Postman collection, no GraphQL surface and no webhook or event catalogue. Probes of developer, developers, docs, /developers, /api, /developer, /partners and /integrations all return NXDOMAIN or HTTP 404, and the sitemap contains no developer, API or partner-portal page at all. A real backend host exists at api.honeyinsurance.com, but it is a private AWS API Gateway that answers every path with HTTP 403 {"message":"Forbidden"}; it serves Honey's own quote funnel and account app and is not documented for third parties. The only publicly reachable standards-based surface is an Auth0 custom-domain tenant at auth.honeyinsurance.com serving anonymous OpenID Connect discovery for consumer account sign-in — not developer API credentials. Quote, bind, issue and FNOL all exist only as consumer web and telephone journeys. No ACORD, AL3, ACORD XML or NGDS reference appears anywhere on the site, which is consistent with an Australian personal-lines carrier operating outside the ACORD agency-download world and with a home market where the Consumer Data Right was designated for general insurance and then deferred, leaving no forcing function for open insurance APIs.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/honey-insurance/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/honey-insurance/refs/heads/main/apis.yml)
+**Areas:** Insurance · Australia · Insurtech · Home Insurance · Property and Casualty · Personal Lines · Direct to Consumer · Embedded Insurance · Smart Home · Claims · Underwriting
 
-## Tags
+## Honey Insurance on APIs.io
 
-- Insurance
-- Australia
-- Insurtech
-- Home Insurance
-- Property and Casualty
-- Personal Lines
-- Direct to Consumer
-- Embedded Insurance
-- Smart Home
-- Claims
-- Underwriting
+Everything profiled for Honey Insurance is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/honey-insurance/](https://apis.io/providers/honey-insurance/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-07-25
-- **Modified:** 2026-07-25
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Security (2)
 
-None. Honey Insurance publishes no public API.
+Authentication, trust centre, and vulnerability disclosure.
 
-This is the honest finding, not a gap in the research. As of 2026-07-25:
+- [Honey Insurance Authentication](https://apis.io/security/honey-insurance/honey-insurance-authentication/)
+- [Honey Insurance Domain Security](https://apis.io/security/honey-insurance/honey-insurance-domain-security/)
 
-- **No developer portal.** `developer.`, `developers.` and `docs.honeyinsurance.com` do not resolve. `/developers`, `/developer`, `/api`, `/partners` and `/integrations` all return HTTP 404. The published sitemap lists 80 URLs and not one of them is a developer, API, broker or partner-portal page.
-- **No downloadable specification.** No OpenAPI, Swagger, AsyncAPI, GraphQL SDL, `.proto` or Postman collection is published anywhere. Zero specs were harvested, and none were inferred.
-- **A private backend, not a public API.** `api.honeyinsurance.com` resolves and returns JSON, but every probed path answers HTTP 403 `{"message":"Forbidden"}` — the AWS API Gateway default deny. It serves Honey's own quote funnel and account app.
-- **Auth is for customers, not developers.** `auth.honeyinsurance.com` is an Auth0 custom-domain tenant serving anonymous OpenID Connect discovery and JWKS (HTTP 200), advertising only stock OIDC profile scopes. There is no developer credential path and no published API audience.
-- **Quote, bind, issue and FNOL all exist — as consumer journeys.** Quote and bind run at `/get-a-quote/start`; issue and documents sit behind `/my-account`; claims are lodged at `/my-account/claims`, by phone on 137 138, or by email. None of the four verbs is exposed as an API, to consumers, agents or partners.
-- **No ACORD footprint.** No reference to ACORD, AL3, ACORD XML, ACORD certified or NGDS appears anywhere on the property. Consistent with an Australian personal-lines direct writer operating outside the ACORD agency-download world.
-- **No webhooks or event catalogue.**
+#### OAuth scopes (1)
 
-Australia has the legal machinery for open insurance and no live obligation. The Consumer Data Right that opened banking and energy was designated to extend to general insurance, then deferred and de-prioritised — so there is no forcing function reaching a company like this one, and its posture reflects that exactly.
+The permissions the API asks for.
 
-See [review.yml](review.yml) for the full probe log, HTTP statuses, auth metadata and provenance.
+- [Honey Insurance Scopes](https://apis.io/scopes/honey-insurance/honey-insurance-scopes/)
 
-## Common Properties
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.honeyinsurance.com/)
-- [About](https://www.honeyinsurance.com/about-us/)
-- [Blog](https://www.honeyinsurance.com/blog/)
-- [Newsroom](https://www.honeyinsurance.com/media-centre/newsroom/)
+- [Sign up](https://www.honeyinsurance.com/get-a-quote/start)
 - [Support](https://www.honeyinsurance.com/honey-help/)
-- [FAQ](https://www.honeyinsurance.com/faq/)
-- [Vocabulary](https://www.honeyinsurance.com/glossary/)
-- [Login](https://www.honeyinsurance.com/my-account)
-- [Terms of Service](https://www.honeyinsurance.com/terms/)
-- [Privacy Policy](https://www.honeyinsurance.com/privacy/)
-- [Well-Known (OIDC)](https://auth.honeyinsurance.com/.well-known/openid-configuration)
+- [Blog](https://www.honeyinsurance.com/blog/)
+- [Terms of service](https://www.honeyinsurance.com/terms/)
+- [Privacy policy](https://www.honeyinsurance.com/privacy/)
 
-## Maintainers
+## API Evangelist rating
 
-- Kin Lane — kin@apievangelist.com
+**Kin Score 20.8** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 49.1 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 19.0 |
+| Access clarity | 34.2 |
+
+**Agent readiness 15.1** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+
+**Regulatory alignment 36.8** — Insurance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/honey-insurance/](https://apis.io/providers/honey-insurance/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Honey Insurance: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/honey-insurance/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
